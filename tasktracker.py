@@ -118,34 +118,57 @@ class TaskTracker:
                 self.tasks_done.append(copied_task)
 
 
+
+
 class TaskTrackerRun(TaskTracker):
     def __init__(self):
         super().__init__()
-        super().add_new_task()
+        print('This is the menu for Task Tracker , press number as per your requirement:')
+        active = True
+        while active:
+            returned_num = self.inter_face()
+            if returned_num == 'q':
+                active = False
+            else:
+                self.backend_interface(int(returned_num))
+
+    def inter_face(self):
+        list_1 = ['add task','display tasks','save all','update task','search task','delete task','set priority for task',]
+        menu = dict(zip(range(1,8),list_1)) #this is a dict comprehension , basically creating a dict to number down list_1
+        for key,val in menu.items():
+            print(f'{key} : {val}')
+        print('press q when you are done')
+        num_ber = input('enter your number here')
+        return num_ber
+
+    def backend_interface(self,number_r):
+        if number_r not in range(1,8):
+            return False
+
+        print(f'number recieved and its type {number_r} , {type(number_r)}')
+
+        if number_r == 1:
+            super().add_new_task()
+        if number_r == 2:
+            super().display_tasks()
 
 
-a = TaskTracker()
-a.load_all()
-#a.add_new_task()
-#a.add_new_task()
-#a.add_new_task()
-#a.update_task(1,'clean porch')
-a.listing_up()
-print(a.tasks_todo)
-print(a.tasks_progress)
-print(a.tasks_done)
-leng = len(a.tasks)
-print(leng)
-a.display_tasks()
-a.save_all()
-#for aa in a.tasks:
-    #print(aa.task,aa.description,aa.id)
-#a.priority_task(2)
-#a.display_tasks()
-#hj = a.tasks[0]
-#print(hj.search_task('clean porch'))
-#print(aa.task)
-#print()
+
+        #CODE IS WORKING FOR NOW BUT REFACTOR IT AT A LATER DATE
+if __name__ == '__main__':
+    a = TaskTrackerRun()
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
